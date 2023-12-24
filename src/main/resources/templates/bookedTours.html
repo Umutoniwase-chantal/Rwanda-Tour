@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+<title>  Booked Tours</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.core.min.js"></script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background-color: #f3f5f9;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column-reverse;
+            position: relative;
+        }
+
+        .sidebar {
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100px;
+            background: #03010e;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            transition: height 0.5s;
+        }
+
+        .wrapper:hover .sidebar {
+            height: 150px;
+        }
+
+        .wrapper .sidebar h2 {
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .wrapper .sidebar ul {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrapper .sidebar ul li {
+            margin-right: 20px;
+            border-bottom: 1px solid #594f8d;
+            transition: background-color 0.3s;
+        }
+
+        .wrapper .sidebar ul li:last-child {
+            margin-right: 0;
+        }
+
+        .wrapper .sidebar ul li a {
+            color: #bdb8d7;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background-color: #594f8d;
+        }
+
+        .wrapper .sidebar ul li:hover a {
+            color: #fff;
+        }
+
+        .wrapper .main_content {
+            margin-top: 100px;
+            transition: margin-top 0.5s;
+        }
+
+        .wrapper:hover .main_content {
+            margin-top: 150px;
+        }
+
+        .wrapper .main_content .header {
+            padding: 20px;
+            background: #fff;
+            color: #594f8d;
+            border-bottom: 1px solid #e0e4e8;
+        }
+
+        .wrapper .main_content .info {
+            margin: 20px;
+            color: #717171;
+            line-height: 25px;
+        }
+
+        .wrapper .main_content .info div {
+            margin-bottom: 20px;
+        }
+        .center-table {
+            margin: 100px auto; /* Adjust the margin-top value to position it down */
+            width: 70%;
+            text-align: center;
+        }
+        .order-button {
+            margin-top: 20px; /* Adjust the margin-top value to position it down */
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 140px;
+
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        /* Add these styles to your existing CSS */
+
+        /* General button styles */
+        button {
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            border: none; /* Remove border */
+            padding: 10px 15px; /* Add padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Display as inline-block to align multiple buttons horizontally */
+            font-size: 16px; /* Set font size */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            border-radius: 5px; /* Add border radius */
+            margin: 10px; /* Add margin to separate buttons */
+        }
+
+        /* Hover effect */
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        /* Additional styling for specific buttons */
+        /* Customize the styles based on your preference */
+        button#downloadPDF {
+            background-color: #337ab7; /* Blue background color */
+        }
+
+        button#exportExcel {
+            background-color: #f0ad4e; /* Orange background color */
+        }
+
+    </style>
+</head>
+<body>
+<div th:replace="~{navigation :: navigation(bookedTours)}"></div>
+
+<h2>Booked Tours</h2>
+<button id="downloadPDF" onclick="downloadAsPDF()">Download as PDF</button>
+
+<table>
+    <thead>
+    <tr>
+        <th>Tour Name</th>
+        <th>User Name</th>
+        <th>User Email</th>
+        <th>Destination</th>
+        <th>Phone Number</th>
+        <th>Country</th>
+        <th>When Starts</th>
+        <th>When Ending</th>
+        <th>Date Added</th>
+        <th>Price</th>
+        <!-- Add more columns as needed -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bookedTour : ${bookedTours}">
+        <td th:text="${bookedTour.tourName}"></td>
+        <td th:text="${bookedTour.userName}"></td>
+        <td th:text="${bookedTour.userEmail}"></td>
+        <td th:text="${bookedTour.destination}"></td>
+        <td th:text="${bookedTour.phoneNumber}"></td>
+        <td th:text="${bookedTour.country}"></td>
+        <td th:text="${bookedTour.whenStarts}"></td>
+        <td th:text="${bookedTour.whenEnding}"></td>
+        <td th:text="${bookedTour.date}"></td>
+        <td th:text="${bookedTour.price}"></td>
+        <!-- Add more columns as needed -->
+    </tr>
+
+    </tbody>
+</table>
+<script>
+    function downloadAsPDF() {
+        var element = document.querySelector('table');
+        var options = {
+            margin: 10,
+            filename: 'booked_tours.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', pagebreak: { mode: 'avoid-all' } }
+        };
+
+        // Add a delay before generating the PDF
+        setTimeout(function() {
+            html2pdf(element, options);
+        }, 1000); // Adjust the delay as needed
+    }
+</script>
+</body>
+
+
+</html>
+

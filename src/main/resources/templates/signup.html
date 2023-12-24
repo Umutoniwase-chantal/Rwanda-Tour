@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <style>
+
+        html {
+            background-color: #56baed;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://www.tripsavvy.com/thmb/rccnA09r-oPswQf_hRuVoUc7iu4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-958551810-8f58cfe3bb284c42a1eba5616f46b9b9.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin: 0; /* Remove default margin */
+        }
+
+        a {
+            color: #92badd;
+            display:inline-block;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display:inline-block;
+            margin: 40px 8px 10px 8px;
+            color: #cccccc;
+        }
+
+        /* STRUCTURE */
+
+
+        /* Updated styles for form wrapper */
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Updated styles for form content */
+        #formContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+            max-height: 80vh; /* Set a maximum height for the form content */
+            overflow-y: auto; /* Add vertical scrollbar if content overflows */
+            -webkit-border-radius: 10px 10px 10px 10px;
+            border-radius: 10px 10px 10px 10px;
+            background: #fff;
+            padding: 30px;
+            -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+
+        label {
+            color: black;
+            margin-top: 10px;
+            text-align: left; /* Align label text to the left */
+        }
+
+        input[type="text"] {
+            margin-top: 5px;
+            width: 100%; /* Adjusted width */
+        }
+
+
+
+        #formFooter {
+            background-color: #f6f6f6;
+            border-top: 1px solid #dce8f1;
+            padding: 25px;
+            text-align: center;
+            -webkit-border-radius: 0 0 10px 10px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* TABS */
+
+        h2.inactive {
+            color: #cccccc;
+        }
+
+        h2.active {
+            color: #0d0d0d;
+            border-bottom: 2px solid #5fbae9;
+        }
+
+        /* FORM TYPOGRAPHY*/
+
+        input[type=button], input[type=submit], input[type=reset]  {
+            background-color: #56baed;
+            border: none;
+            color: white;
+            padding: 15px 80px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 13px;
+            -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+            box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+            margin: 5px 20px 40px 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -ms-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+            background-color: #39ace7;
+        }
+
+        input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+            -moz-transform: scale(0.95);
+            -webkit-transform: scale(0.95);
+            -o-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+
+        input[type=text], input[type=email], input[type=password] {
+            background-color: #f6f6f6;
+            border: none;
+            color: #0d0d0d;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            width: 85%;
+            border: 2px solid #f6f6f6;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+        }
+
+        input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+            background-color: #fff;
+            border-bottom: 2px solid #5fbae9;
+        }
+
+        input[type=text]::placeholder, input[type=email]::placeholder, input[type=password]::placeholder {
+            color: #cccccc;
+        }
+
+        /* ANIMATIONS */
+
+        /* Simple CSS3 Fade-in-down Animation */
+        .fadeInDown {
+            -webkit-animation-name: fadeInDown;
+            animation-name: fadeInDown;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        @-webkit-keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        /* Simple CSS3 Fade-in Animation */
+        @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+        .fadeIn {
+            opacity:0;
+            -webkit-animation:fadeIn ease-in 1;
+            -moz-animation:fadeIn ease-in 1;
+            animation:fadeIn ease-in 1;
+
+            -webkit-animation-fill-mode:forwards;
+            -moz-animation-fill-mode:forwards;
+            animation-fill-mode:forwards;
+
+            -webkit-animation-duration:1s;
+            -moz-animation-duration:1s;
+            animation-duration:1s;
+        }
+
+        .fadeIn.first {
+            -webkit-animation-delay: 0.4s;
+            -moz-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+        }
+
+        .fadeIn.second {
+            -webkit-animation-delay: 0.6s;
+            -moz-animation-delay: 0.6s;
+            animation-delay: 0.6s;
+        }
+
+        .fadeIn.third {
+            -webkit-animation-delay: 0.8s;
+            -moz-animation-delay: 0.8s;
+            animation-delay: 0.8s;
+        }
+
+        .fadeIn.fourth {
+            -webkit-animation-delay: 1s;
+            -moz-animation-delay: 1s;
+            animation-delay: 1s;
+        }
+
+        /* Simple CSS3 Fade-in Animation */
+        .underlineHover:after {
+            display: block;
+            left: 0;
+            bottom: -10px;
+            width: 0;
+            height: 2px;
+            background-color: #56baed;
+            content: "";
+            transition: width 0.2s;
+        }
+
+        .underlineHover:hover {
+            color: #0d0d0d;
+        }
+
+        .underlineHover:hover:after{
+            width: 100%;
+        }
+
+        /* OTHERS */
+
+        *:focus {
+            outline: none;
+        }
+
+        #icon {
+            width:60%;
+        }
+        div.wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between; /* Adjusted to space between items */
+            height: 100vh; /* Set the height to the viewport height */
+            padding: 20px;
+        }
+
+        div#formContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            color: black;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            margin-top: 5px;
+        }
+
+        div.wrapper p.fadeIn.fourth {
+            margin-top: 20px;
+        }
+        div p.fadeIn.fourth {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        div p.fadeIn.fourth a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        div p.fadeIn.fourth a:hover {
+            background-color: #021721;
+        }
+        div.wrapper p.fadeIn.fourth {
+            margin-top: 20px;
+        }
+
+        div p.fadeIn.fourth {
+            text-align: center;
+            margin-top: 20px;
+            position: relative; /* Added position relative */
+        }
+
+        div p.fadeIn.fourth a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            background-color: #56baed; /* Match the button background color */
+            margin-top: 10px; /* Add some top margin for separation */
+        }
+
+        div p.fadeIn.fourth a:hover {
+            background-color: #021721;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .eye-icon {
+
+            cursor: pointer;
+            color: black; /* Set eye icon color to black */
+        }
+
+        /* Style for the error message */
+        #divCheckPasswordMatch {
+            color: black; /* Set error message color to black */
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <div class="fadeIn first" style="padding-bottom: 50px;"></div>
+        <form th:action="@{/signup}" method="POST" onsubmit="return validateForm()">
+            <!-- Your existing fields -->
+            <div th:if="${usernameTaken}" class="error-message">
+                Username is already taken. Please choose a different username.
+            </div>
+            <div th:if="${emptyFields}" class="error-message">
+                Please fill in all required fields.
+            </div>
+
+            <label for="username"></label><input type="text" id="username" class="fadeIn second" name="username" placeholder="Username" required>
+            <label for="password"></label>
+            <input type="password" id="password" class="fadeIn second" name="password" placeholder="Password" onkeyup="checkPasswordMatch();" required>
+
+            <i class="fas fa-eye eye-icon" onclick="togglePassword('password')"></i>
+
+            <label for="passwordConfirmation"></label>
+            <input type="password" id="passwordConfirmation" class="fadeIn second" name="passwordConfirmation" placeholder="Confirm Password" onkeyup="checkPasswordMatch();" required>
+
+            <i class="fas fa-eye eye-icon" onclick="togglePassword('passwordConfirmation')"></i>
+
+            <div id="divCheckPasswordMatch" style="margin-top: 10px;"></div>
+            <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email">
+
+            <input type="text" id="phoneNumber" class="fadeIn second" name="phoneNumber" placeholder="Phone Number" required>
+            <input type="text" id="country" class="fadeIn second" name="country" placeholder="Country" required>
+
+            <!-- Security Questions with Labels -->
+            <label for="securityAnswer1">What high school did you attend?</label>
+            <input type="hidden" id="securityQuestion1" name="securityQuestion1" value="What high school did you attend?">
+            <input type="text" id="securityAnswer1" class="fadeIn second" name="securityAnswer1" placeholder="Security Answer 1" required>
+
+            <label for="securityAnswer2">In what city were you born?</label>
+            <input type="hidden" id="securityQuestion2" name="securityQuestion2" value="In what city were you born?">
+            <input type="text" id="securityAnswer2" class="fadeIn second" name="securityAnswer2" placeholder="Security Answer 2" required>
+
+            <label for="securityAnswer3">What was the name of your elementary school?</label>
+            <input type="hidden" id="securityQuestion3" name="securityQuestion3" value="What was the name of your elementary school?">
+            <input type="text" id="securityAnswer3" class="fadeIn second" name="securityAnswer3" placeholder="Security Answer 3" required>
+
+            <!-- Your existing submit button -->
+            <input type="submit" class="fadeIn fourth" value="Sign Up">
+        </form>
+
+        <script>
+            // JavaScript to toggle the visibility of security questions
+            document.addEventListener('DOMContentLoaded', function () {
+                // Hide the security questions initially
+                document.getElementById('securityQuestion1').style.display = 'none';
+                document.getElementById('securityQuestion2').style.display = 'none';
+                document.getElementById('securityQuestion3').style.display = 'none';
+
+                // Show the corresponding security question when an answer field is focused
+                document.getElementById('securityAnswer1').addEventListener('focus', function () {
+                    document.getElementById('securityQuestion1').style.display = 'block';
+                });
+
+                document.getElementById('securityAnswer2').addEventListener('focus', function () {
+                    document.getElementById('securityQuestion2').style.display = 'block';
+                });
+
+                document.getElementById('securityAnswer3').addEventListener('focus', function () {
+                    document.getElementById('securityQuestion3').style.display = 'block';
+                });
+            });
+
+            function validateForm() {
+                // Get all input fields
+                var inputFields = document.querySelectorAll('input');
+
+                // Check if any required field is empty
+                for (var i = 0; i < inputFields.length; i++) {
+                    if (inputFields[i].hasAttribute('required') && inputFields[i].value.trim() === '') {
+                        alert('Please fill in all required fields.');
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            function checkPasswordMatch() {
+                var password = $("#password").val();
+                var confirmPassword = $("#passwordConfirmation").val();
+
+                if (password != confirmPassword)
+                    $("#divCheckPasswordMatch").html("Passwords do not match!");
+                else
+                    $("#divCheckPasswordMatch").html("Passwords match.");
+            }
+
+            function togglePassword(inputId) {
+                var input = document.getElementById(inputId);
+                if (input.type === "password") {
+                    input.type = "text";
+                } else {
+                    input.type = "password";
+                }
+            }
+
+            function validateForm() {
+                // Get all input fields
+                var inputFields = document.querySelectorAll('input');
+
+                // Check if any required field is empty
+                for (var i = 0; i < inputFields.length; i++) {
+                    if (inputFields[i].hasAttribute('required') && inputFields[i].value.trim() === '') {
+                        alert('Please fill in all required fields.');
+                        return false;
+                    }
+                }
+
+                // Check if passwords match
+                var password = $("#password").val();
+                var confirmPassword = $("#passwordConfirmation").val();
+
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match.');
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+
+
+    </div>
+
+    <!-- Check for authentication error and display a message -->
+    <div th:if="${param.error}">
+        <p style="color: red;">Invalid username or password</p>
+    </div>
+</div>
+
+<div>
+    <p class="fadeIn fourth">
+        Already have an account
+        <a th:href="@{/login}">Login</a>
+    </p>
+</div>
+</body>
+
+</html>
+
+<body>
+
+</body>
+</html>

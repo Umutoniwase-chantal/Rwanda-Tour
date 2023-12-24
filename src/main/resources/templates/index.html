@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Visit Rwanda</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="https://travelessencemag.com/wp-content/uploads/2023/09/travelessence-kigali.jpeg">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background-color: #f3f5f9;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column-reverse;
+            position: relative;
+        }
+
+        .sidebar {
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100px;
+            background: #03010e;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            transition: height 0.5s;
+        }
+
+        .wrapper:hover .sidebar {
+            height: 150px;
+        }
+
+        .wrapper .sidebar h2 {
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .wrapper .sidebar ul {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrapper .sidebar ul li {
+            margin-right: 20px;
+            border-bottom: 1px solid #594f8d;
+            transition: background-color 0.3s;
+        }
+
+        .wrapper .sidebar ul li:last-child {
+            margin-right: 0;
+        }
+
+        .wrapper .sidebar ul li a {
+            color: #bdb8d7;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background-color: #594f8d;
+        }
+
+        .wrapper .sidebar ul li:hover a {
+            color: #fff;
+        }
+
+        .wrapper .main_content {
+            margin-top: 100px;
+            transition: margin-top 0.5s;
+        }
+
+        .wrapper:hover .main_content {
+            margin-top: 150px;
+        }
+
+        .wrapper .main_content .header {
+            padding: 20px;
+            background: #fff;
+            color: #594f8d;
+            border-bottom: 1px solid #e0e4e8;
+        }
+
+        .wrapper .main_content .info {
+            margin: 20px;
+            color: #717171;
+            line-height: 25px;
+        }
+
+        .wrapper .main_content .info div {
+            margin-bottom: 20px;
+        }
+        .center-table {
+            margin: 100px auto; /* Adjust the margin-top value to position it down */
+            width: 70%;
+            text-align: center;
+        }
+        .order-button {
+            margin-top: 20px; /* Adjust the margin-top value to position it down */
+        }
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
+
+        body,html {
+            border: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .promotion-carousel {
+
+            .promotions {
+                width: 100%;
+                height: 100%
+            }
+
+            .promotion {
+                width: 100%;
+                height: 100vh;
+                min-height: 600px;
+                position: relative;
+                background-size: cover;
+                background-position: top right;
+                background-repeat: no-repeat;
+                overflow: hidden;
+
+                .shade {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,0) 50%);
+                }
+            }
+        }
+
+        .promo-text {
+            color: #fff;
+            position: relative;
+
+            .copy {
+                display: block;
+            }
+        }
+
+        .promo-detail {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            z-index: 100;
+            width: 85%;
+            margin-left: 30px;
+            padding: 10% 10% 10% 0;
+            transform: translate(0,-50%);
+
+            @media (min-width: 1280px) {
+                margin-left: 90px;
+            }
+
+            @media (min-width: 1440px) {
+                width: 550px;
+            }
+
+            .headline {
+                font-weight: 900;
+                font-size: 22px;
+                line-height: 1.15;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+            }
+
+            .body {
+                font-size: 14px;
+                line-height: 1.3;
+                margin-bottom: 5px;
+                text-transform: none
+            }
+
+            .buttons {
+                padding: 15px 0;
+            }
+
+            .button {
+                box-sizing: content-box;
+                height: auto;
+                line-height: 1;
+                padding: 15px 20px;
+                width: auto;
+                display: inline-block;
+            }
+
+            .dash {
+                background: #b10000;
+                display: block;
+                height: 3px;
+                margin-bottom: 10px;
+                width: 30px
+            }
+
+            .promo-flag {
+                background: 0 0;
+                font-size: 14px;
+                line-height: 14px;
+                margin-bottom: 8px;
+                position: relative;
+                text-transform: uppercase;
+                display: inline-block;
+            }
+        }
+        @media (min-width: 668px) {
+            .promo-detail {
+                width: 450px;
+
+                .headline {
+                    font-size: 36px;
+                    line-height: 1.1
+                }
+
+                .body {
+                    font-size: 14px;
+                    margin-bottom: 0;
+                    text-transform: none
+                }
+            }
+        }
+
+        @media (min-width: 840px) {
+            .promo-detail {
+
+                .headline {
+                    font-size:42px
+                }
+
+                .body {
+                    font-size: 18px
+                }
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .promo-detail {
+                .dash {
+                    display:block;
+                    height: 3px;
+                    margin-bottom: 15px;
+                    width: 30px;
+                }
+
+                .headline {
+                    font-weight: 600;
+                    font-size: 56px;
+                    line-height: .85;
+                    margin-bottom: 15px;
+                    margin-left: -2px;
+
+                    &.medium {
+                        font-size: 50px;
+                    }
+
+                    &.long {
+                        font-size: 40px;
+                    }
+                }
+
+                .body {
+                    font-size: 18px;
+                    line-height: 1.4;
+                }
+
+                .button {
+                    padding: 12px;
+                }
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .promo-detail {
+                .dash {
+                    height:4px;
+                    width: 40px;
+                }
+
+                .headline {
+                    font-size: 66px;
+
+                    &.medium {
+                        font-size: 56px;
+                        line-height: 1;
+                    }
+
+                    &.long {
+                        font-size: 46px;
+                        line-height: 1
+                    }
+                }
+
+                .promo-flag {
+                    font-size: 18px;
+                    line-height: 18px;
+                }
+
+                .body {
+                    font-size: 24px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+
+        .navigation {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 50px;
+
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            li {
+                position: relative;
+                width: 8px;
+                height: 8px;
+                margin: 15px 0;
+
+                a {
+                    background-color: $white;
+                    border-radius: 100%;
+                    height: 100%;
+                    width: 100%;
+                    display: block;
+                    transition: .2s ease;
+
+                    &.active {
+                        background-color: $red;
+                    }
+                }
+            }
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .your-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .your-footer-content p {
+            font-size: 16px;
+            margin: 0;
+        }
+    </style>
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+<div th:replace="~{navigation :: navigation(Home)}"></div>
+<div class="promotion-carousel">
+    <div class="promotions">
+        <div>
+            <!-- Individual promotion sections updated with "Visit Rwanda" content -->
+            <div class="promotion" id="section1" style="background-image: url(https://deih43ym53wif.cloudfront.net/cityscape-things-to-do-in-kigali-rwanda_44e57bd0bf.jpeg)">
+                <div class="shade"></div>
+                <div class="promo-detail cycle-overlay">
+                    <div class="promo-text">
+                        <span class="dash"></span>
+                        <span class="promo-flag">Explore the Beauty of Rwanda</span>
+                        <a href="#" class="copy">
+                            <div class="headline">Visit Rwanda Today</div>
+                            <p class="body long">Discover the unique landscapes and culture of Rwanda.</p>
+                        </a>
+                        <div class="buttons">
+                            <a class="button sho-play-link" href="#">Explore Now</a>
+                            <a class="button info-button" href="#">More Info</a>
+                            <a class="button see-all" href="#">All Attractions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="promotion" id="section10" style="background-image: url(https://www.visitrwanda.com/wp-content/uploads/fly-images/1639/Visit-Rwanda-Singing-Fishermen-1920x1280.jpg)">
+                <div class="shade"></div>
+                <div class="promo-detail cycle-overlay">
+                    <div class="promo-text">
+                        <span class="dash"></span>
+                        <a href="#" class="copy">
+                            <div class="headline">Explore Rwanda with us </div>
+                            <p class="body long"> discover Rwanda with our tours</p>
+                        </a>
+                        <div class="buttons">
+                            <a class="button see-all" href="#">Explore Collection</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="promotion" id="section2" style="background-image: url(https://www.discoverafrica.com/wp-content/uploads/2021/11/virunga-mountains-rwanda.jpg)">
+                <div class="shade"></div>
+                <div class="promo-detail cycle-overlay">
+                    <div class="promo-text">
+                        <span class="dash"></span>
+                        <span class="promo-flag">Discover Rwanda's with us </span>
+                        <a href="#" class="copy">
+                            <div class="headline">Visit Rwanda</div>
+                            <p class="body long">Experience the beauty of Rwanda's diverse seasons. Embrace the warmth of its culture and landscapes.</p>
+                        </a>
+                        <div class="buttons">
+                            <a class="button info-button" href="#">More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="promotion" id="section3" style="background-image: url(https://www.rwandasafaritour.com/wp-content/uploads/2023/07/TAL-header-virunga-mountains-rwanda-ALISTRWANDA0123-049a3b1c218e4358a90015bd09fff7be.jpg)">
+                <div class="shade"></div>
+                <div class="promo-detail cycle-overlay">
+                    <div class="promo-text">
+                        <span class="dash"></span>
+                        <a href="#" class="copy">
+                            <div class="headline">Explore Rwanda's Beauty</div>
+                            <p class="body long">Embark on a journey as a young explorer, discovering the captivating landscapes and vibrant culture of Rwanda.</p>
+                        </a>
+                        <div class="buttons">
+                            <a class="button sho-play-link" href="#"></span>Explore Now</a>
+                            <a class="button info-button" href="#"></span>More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="promotion" id="section4" style="background-image: url(https://www.visitrwanda.com/wp-content/uploads/fly-images/1659/Visit-Rwanda-Kingfisher-Kayaking-1920x1079.jpg)">
+                <div class="shade"></div>
+                <div class="promo-detail cycle-overlay">
+                    <div class="promo-text">
+                        <span class="dash"></span>
+                        <a href="#" class="copy">
+                            <div class="headline medium">Discover Rwanda's Stories</div>
+                            <p class="body long">Experience the richness of Rwanda's tales. Join us in the season finale as we unveil the narratives that shape our nation.</p>
+                        </a>
+                        <div class="buttons">
+                            <a class="button sho-play-link" href="#"></span>Discover Now</a>
+                            <a class="button info-button" href="#">More Info</a>
+                            <a class="button see-all" href="#">All Episodes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Repeat the above structure for each promotion section, updating the content accordingly -->
+
+
+        </div>
+            </div>
+        </div>
+
+<div class="navigation">
+    <ul>
+
+        <li><a href="#section1" data-number="1"></a></li>
+
+        <li><a href="#section2" data-number="2"></a></li>
+
+        <li><a href="#section3" data-number="3"></a></li>
+
+        <li><a href="#section4" data-number="4"></a></li>
+
+        <li><a href="#section5" data-number="5"></a></li>
+
+        <li><a href="#section6" data-number="6"></a></li>
+
+        <li><a href="#section7" data-number="7"></a></li>
+
+        <li><a href="#section8" data-number="8"></a></li>
+
+        <li><a href="#section9" data-number="9"></a></li>
+
+        <li><a href="#section10" data-number="10"></a></li>
+
+    </ul>
+</div>
+
+<footer>
+    <div class="your-footer-content">
+        <!-- Add your footer content here -->
+        <p>&copy; 2023 Visit Rwanda. All rights reserved.</p>
+    </div>
+
+</footer>
+<script>
+    const ele = '.promotion-carousel';
+    const $window = $(window);
+    const viewportHeight = $window.height();
+
+    let ui = {
+    promo: ele + ' .promotion',
+    promoText: ele + ' .promo-text',
+    navigationItems: '.navigation a'
+    };
+
+    function isOnScreen(el) {
+    const viewport = {
+    top : $window.scrollTop()
+    };
+
+    viewport.bottom = viewport.top + viewportHeight;
+
+    const bounds = el.offset();
+    bounds.bottom = el.offset().top + el.outerHeight();
+
+    return (!(viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+    }
+
+    class ScrollEvents {
+
+    run() {
+    const $promo = $('.promotion');
+    const $promoText = $('.promo-text');
+
+    function smoothScroll(target) {
+    $('body, html').animate({'scrollTop':target.offset().top}, 600);
+    }
+
+    $(ui.navigationItems).on('click', e => {
+    e.preventDefault();
+    smoothScroll($(e.currentTarget.hash));
+    });
+
+    $window.on('scroll', () => {
+
+    $(ui.promo).toArray().forEach(el => {
+    const $el = $(el);
+    if (isOnScreen($el)) {
+    this.scrolly($el);
+    }
+    });
+    this.updateNavigation();
+    this.fadeAtTop($(ui.promoText));
+    });
+
+    this.updateNavigation();
+    }
+
+    scrolly(el) {
+    const topOffset = el.offset().top;
+    const height = el.height();
+    let scrollTop = $window.scrollTop();
+    const maxPixels = height / 4;
+    const percentageScrolled = (scrollTop - topOffset) / height;
+    let backgroundOffset = maxPixels * percentageScrolled;
+
+    backgroundOffset = Math.round(Math.min(maxPixels, Math.max(0, backgroundOffset)));
+
+    el.css(`background-position`, `right 0px top ${backgroundOffset}px`);
+    }
+
+    fadeAtTop(el) {
+    const startPos = 0.25;
+
+    el.toArray().forEach(el => {
+    const $el = $(el);
+    let position = $el.offset().top - $window.scrollTop() + viewportHeight / 6;
+    let opacity = position < viewportHeight * startPos ? position / (viewportHeight * startPos) * 1 : 1;
+
+    $el.css('opacity', opacity);
+    });
+    }
+
+    updateNavigation() {
+    $(ui.promo).toArray().forEach((el) => {
+    let $el = $(el);
+    let activeSection = $(`.navigation a[href="#${$el.attr('id')}"]`).data('number') - 1;
+
+    if ( ( $el.offset().top - $window.height()/2 < $window.scrollTop() ) && ( $el.offset().top + $el.height() - $window.height()/2 > $window.scrollTop() ) ) {
+    $(ui.navigationItems).eq(activeSection).addClass('active');
+    } else {
+    $(ui.navigationItems).eq(activeSection).removeClass('active');
+    }
+    });
+    }
+    };
+
+    const scrollEvents = new ScrollEvents();
+
+    scrollEvents.run();
+</script>
+
+</body>
+</html>
